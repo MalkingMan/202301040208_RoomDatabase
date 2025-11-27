@@ -12,3 +12,39 @@ fun SiswaApp(
 ) {
     HostNavigasi(navController = navController, modifier = modifier)
 }
+/**
+ * Navigation Graph utama aplikasi (Home <-> Entry)
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HostNavigasi(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = DestinasiHome.route,
+        modifier = modifier
+    ) {
+
+        // ================================
+        // HOME SCREEN
+        // ================================
+        composable(route = DestinasiHome.route) {
+            HomeScreen(
+                navigateToItemEntry = {
+                    navController.navigate(DestinasiEntry.route)
+                }
+            )
+        }
+
+        // ================================
+        // ENTRY SCREEN
+        // ================================
+        composable(route = DestinasiEntry.route) {
+            EntrySiswaScreen(
+                navigateBack = { navController.popBackStack() }
+            )
+        }
+    }
+}
