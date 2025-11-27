@@ -60,3 +60,63 @@ fun EntrySiswaScreen(
         )
     }
 }
+
+@Composable
+fun EntrySiswaBody(
+    uiStateSiswa: UIStateSiswa,
+    onSiswaValueChange: (DetailSiswa) -> Unit,
+    onSaveClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        modifier = modifier.padding(16.dp)
+    ) {
+
+        FormInputSiswa(
+            detailSiswa = uiStateSiswa.detailSiswa,
+            onValueChange = onSiswaValueChange,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Button(
+            onClick = onSaveClick,
+            enabled = uiStateSiswa.isEntryValid,
+            shape = MaterialTheme.shapes.small,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = stringResource("Submit"))
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FormInputSiswa(
+    detailSiswa: DetailSiswa,
+    modifier: Modifier = Modifier,
+    onValueChange: (DetailSiswa) -> Unit = {},
+    enabled: Boolean = true
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+
+        OutlinedTextField(
+            value = detailSiswa.nama,
+            onValueChange = { onValueChange(detailSiswa.copy(nama = it)) },
+            label = { Text(text = stringResource("Nama Siswa")) },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
+            singleLine = true
+        )
+
+        OutlinedTextField(
+            value = detailSiswa.alamat,
+            onValueChange = { onValueChange(detailSiswa.copy(alamat = it)) },
+            label = { Text(text = stringResource("Alamat Siswa")) },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
+            singleLine = true
+        )
