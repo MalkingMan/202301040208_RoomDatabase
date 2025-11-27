@@ -12,15 +12,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.res.stringResource
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.myroomsatu.viewmodel.EntryViewModel
-import com.example.myroomsatu.viewmodel.DetailSiswa
-import com.example.myroomsatu.viewmodel.UIStateSiswa
-import com.example.myroomsatu.PenyediaViewModel
-import com.example.myroomsatu.navigation.DestinasiEntry
 import kotlinx.coroutines.launch
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.ui.unit.dp
+import com.example.roomdatabase.viewmodel.EntryViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -120,3 +116,28 @@ fun FormInputSiswa(
             enabled = enabled,
             singleLine = true
         )
+
+        OutlinedTextField(
+            value = detailSiswa.telpon,
+            onValueChange = { onValueChange(detailSiswa.copy(telpon = it)) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = { Text(text = stringResource("Telpon Siswa")) },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
+            singleLine = true
+        )
+
+        if (enabled) {
+            Text(
+                text = "* required fields",
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
+
+        HorizontalDivider(
+            modifier = Modifier.padding(bottom = 16.dp),
+            thickness = 8.dp,
+            color = Color.Blue
+        )
+    }
+}
