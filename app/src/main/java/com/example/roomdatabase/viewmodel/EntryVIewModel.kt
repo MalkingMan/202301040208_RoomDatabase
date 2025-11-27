@@ -2,10 +2,10 @@ package com.example.roomdatabase.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.mutableStateOf
-import com.example.myroomsatu.repositori.RepositorySiswa
-import com.example.myroomsatu.room.Siswa
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import com.example.roomdatabase.room.Siswa
+import com.example.roomdatabase.repositori.RepositoriSiswa
 
 // -------------------------
 // DATA CLASS DETAIL SISWA
@@ -14,7 +14,7 @@ data class DetailSiswa(
     val id: Int = 0,
     val nama: String = "",
     val alamat: String = "",
-    val telpon: String = ""
+    val telepon: String = ""
 )
 
 // -------------------------
@@ -32,7 +32,7 @@ fun DetailSiswa.toSiswa(): Siswa = Siswa(
     id = id,
     nama = nama,
     alamat = alamat,
-    telpon = telpon
+    telepon = telepon
 )
 
 
@@ -52,17 +52,14 @@ fun Siswa.toDetailSiswa(): DetailSiswa = DetailSiswa(
     id = id,
     nama = nama,
     alamat = alamat,
-    telpon = telpon
+    telepon = telepon
 )
 
 // -------------------------
 // VIEWMODEL
 // -------------------------
-class EntryViewModel(private val repositorySiswa: RepositorySiswa) : ViewModel() {
+class EntryViewModel(private val repositoriSiswa: RepositoriSiswa) : ViewModel() {
 
-    /**
-     * Berisi status Siswa saat ini
-     */
     var uiStateSiswa by mutableStateOf(UIStateSiswa())
         private set
 
@@ -71,7 +68,7 @@ class EntryViewModel(private val repositorySiswa: RepositorySiswa) : ViewModel()
     // -------------------------
     private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa): Boolean {
         return with(uiState) {
-            nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
+            nama.isNotBlank() && alamat.isNotBlank() && telepon.isNotBlank()
         }
     }
 
@@ -91,7 +88,7 @@ class EntryViewModel(private val repositorySiswa: RepositorySiswa) : ViewModel()
     // -------------------------
     suspend fun saveSiswa() {
         if (validasiInput()) {
-            repositorySiswa.insertSiswa(
+            repositoriSiswa.insertSiswa(
                 siswa = uiStateSiswa.detailSiswa.toSiswa()
             )
         }

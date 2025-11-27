@@ -2,13 +2,12 @@ package com.example.roomdatabase.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myroomsatu.repositori.RepositorySiswa
-import com.example.myroomsatu.room.Siswa
+import com.example.roomdatabase.repositori.RepositoriSiswa
+import com.example.roomdatabase.room.Siswa
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val repositorySiswa: RepositorySiswa
+    private val repositorySiswa: RepositoriSiswa
 ) : ViewModel() {
 
     companion object {

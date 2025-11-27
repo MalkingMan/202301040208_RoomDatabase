@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.ui.unit.dp
+import com.example.roomdatabase.view.route.DestinyEntry
 import com.example.roomdatabase.viewmodel.EntryViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,7 +33,7 @@ fun EntrySiswaScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             SiswaTopAppBar(
-                title = stringResource(id = DestinasiEntry.titleRes),
+                title = stringResource(id = DestinyEntry.titleRes),
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
                 navigateUp = navigateBack
@@ -118,7 +119,7 @@ fun FormInputSiswa(
         )
 
         OutlinedTextField(
-            value = detailSiswa.telpon,
+            value = detailSiswa.telepon,
             onValueChange = { onValueChange(detailSiswa.copy(telpon = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             label = { Text(text = stringResource("Telpon Siswa")) },

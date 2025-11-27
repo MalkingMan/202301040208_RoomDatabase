@@ -10,11 +10,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roomdatabase.R
+import com.example.roomdatabase.room.Siswa
+import com.example.roomdatabase.viewmodel.HomeViewModel
+import com.example.roomdatabase.viewmodel.provider.PenyediaViewModel
+import com.example.roomdatabase.view.route.DestinasiHome
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,7 +49,7 @@ fun HomeScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = stringResource("Tambah Siswa")
+                    contentDescription = stringResource(R.string.tambah_siswa)
                 )
             }
         }
@@ -71,7 +77,7 @@ fun BodyHome(
     ) {
         if (itemSiswa.isEmpty()) {
             Text(
-                text = stringResource("Tidak ada data Siswa. Tap + untuk menambah data"),
+                text = stringResource(R.string.deskripsi_no_item),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(16.dp)
@@ -134,7 +140,7 @@ fun DataSiswa(
                 )
 
                 Text(
-                    text = siswa.telpon,
+                    text = siswa.telepon,
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(start = 4.dp)
                 )
