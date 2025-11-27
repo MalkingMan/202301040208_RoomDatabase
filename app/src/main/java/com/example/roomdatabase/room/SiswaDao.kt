@@ -1,9 +1,12 @@
 package com.example.roomdatabase.room
 
+import android.app.Application
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.roomdatabase.repositori.ContainerApp
+import com.example.roomdatabase.repositori.ContainerDataApp
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,4 +17,14 @@ interface SiswaDao
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(siswa: Siswa)
+}
+
+class AplikasiSiswa : Application() {
+
+    lateinit var container: ContainerApp
+
+    override fun onCreate() {
+        super.onCreate()
+        container = ContainerDataApp(this)
+    }
 }
