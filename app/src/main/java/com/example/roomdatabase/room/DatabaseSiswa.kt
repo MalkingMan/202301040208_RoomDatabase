@@ -13,3 +13,20 @@ abstract class DatabaseSiswa : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: DatabaseSiswa? = null
+
+
+        fun getDatabase(context: Context): DatabaseSiswa {
+            return INSTANCE ?: synchronized(this) {
+                Room.databaseBuilder(
+                    context.applicationContext,
+                    DatabaseSiswa::class.java,
+                    "siswa_database"
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+                    .also { INSTANCE = it }
+            }
+        }
+    }
+
+}
